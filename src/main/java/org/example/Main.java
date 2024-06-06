@@ -6,6 +6,8 @@ import org.example.entity.Employee;
 import java.util.*;
 
 public class Main {
+    private static Map<Long, Employee> employeeMap;
+
     public static void main(String[] args) {
         Employee employee1=new Employee(1,"Burak","Şenel");
         Employee employee2=new Employee(1,"Tekrar","Şenol");
@@ -38,18 +40,22 @@ public class Main {
     }
 
     public static Map<Long, Employee> findUniques(List<Employee> employees) {
-        HashMap<Long, Employee> uniques = new HashMap<>();
-        HashSet<Employee> duplicates = new HashSet<>();
 
-        for (Employee emp : employees) {
-            if (uniques.containsKey(emp.getId())) {
-                duplicates.add(emp);
-                duplicates.add(uniques.remove(emp.getId()));
-            } else if (!duplicates.contains(emp)) {
-                uniques.put(emp.getId(), emp);
+        Iterator<Employee> iterator = employees.iterator();
+        employeeMap = new HashMap<>();
+        while (iterator.hasNext()) {
+            Employee employee = iterator.next();
+            if (employee == null) {
+                System.out.println("null data buldum");
+                continue;
             }
+            if (!employeeMap.containsKey(employee.getId())) {
+                employeeMap.put(employee.getId(), employee);
+
+            }
+
         }
-        return uniques;
+        return employeeMap;
     }
 
     public static List<Employee> removeDuplicates(List<Employee> employees) {
