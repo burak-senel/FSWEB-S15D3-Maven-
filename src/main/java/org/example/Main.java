@@ -5,7 +5,10 @@ import org.example.entity.Employee;
 
 import java.util.*;
 
+import static org.example.WordCounter.calculateWord;
+
 public class Main {
+
     private static Map<Long, Employee> employeeMap;
 
     public static void main(String[] args) {
